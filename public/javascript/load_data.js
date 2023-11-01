@@ -40,7 +40,7 @@ let cargarPrecipitacion = () => {
   precipitacionMaxValue.textContent = `Max ${max} [mm]`;
 };
 
-cargarPrecipitacion();
+
 let cargarFechaActual = () => {
   //Obtenga la referencia al elemento h6
   //Obtenga la referencia al elemento h6
@@ -51,4 +51,95 @@ let cargarFechaActual = () => {
   tituloH6.textContent = fechaActual();
 };
 
+
+let cargarOpenMeteo = () => {
+  //URL que responde con la respuesta a cargar
+  let URL = "https://api.open-meteo.com/v1/forecast?latitude=-2.1962&longitude=-79.8862&hourly=temperature_2m&timezone=auto";
+
+  fetch(URL)
+    .then((responseText) => responseText.json())
+    .then((responseJSON) => {
+      console.log(responseJSON);
+
+      //Respuesta en formato JSON
+      //Referencia al elemento con el identificador plot
+      let plotRef = document.getElementById("plot1");
+
+      //Etiquetas del gráfico
+      let labels = responseJSON.hourly.time;
+
+      //Etiquetas de los datos
+      let data = responseJSON.hourly.temperature_2m;
+
+      //Objeto de configuración del gráfico
+      let config = {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Temperature [2m]",
+              data: data,
+            },
+          ],
+        },
+      };
+
+      //Objeto con la instanciación del gráfico
+      let chart1 = new Chart(plotRef, config);
+    })
+    .catch(console.error);
+};
+let cargarOpenMeteo2 = () => {
+    //URL que responde con la respuesta a cargar
+    let URL = "https://api.open-meteo.com/v1/forecast?latitude=-2.1962&longitude=-79.8862&hourly=relativehumidity_2m,apparent_temperature,precipitation_probability&timezone=auto";
+  
+    fetch(URL)
+      .then((responseText) => responseText.json())
+      .then((responseJSON) => {
+        console.log(responseJSON);
+  
+        //Respuesta en formato JSON
+        //Referencia al elemento con el identificador plot
+        let plotRef = document.getElementById("plot2");
+  
+        //Etiquetas del gráfico
+        let labels = responseJSON.hourly.time;
+  
+        //Etiquetas de los datos
+        let data1 = responseJSON.hourly.relativehumidity_2m;
+        let data2 = responseJSON.hourly.apparent_temperature;
+        let data3 = responseJSON.hourly.precipitation_probability;
+  
+        //Objeto de configuración del gráfico
+        let config = {
+          type: "line",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Relative humidity [2m]",
+                data: data1,
+              },
+              {
+                label: "apparent_temperature",
+                data: data2,
+              },
+              {
+                label: "precipitation_probability",
+                data: data3,
+              }
+            ],
+          },
+        };
+  
+        //Objeto con la instanciación del gráfico
+        let chart1 = new Chart(plotRef, config);
+      })
+      .catch(console.error);
+  };
+
+cargarPrecipitacion();
 cargarFechaActual();
+cargarOpenMeteo();
+cargarOpenMeteo2();
