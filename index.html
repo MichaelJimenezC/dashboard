@@ -22,7 +22,7 @@
 
     <header>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
                     data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false"
@@ -32,13 +32,20 @@
                 <div class="collapse navbar-collapse" id="navbarExample01">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="#indicadores">Indicadores</a>
+                            <a class="nav-link" href="#timezone">Clima Actual</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#graficos">Gráficos</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="#indicadores">Indicadores</a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link" href="#datos">Datos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#mapa">Mapa monitoreo</a>
                         </li>
 
                     </ul>
@@ -47,9 +54,160 @@
         </nav>
         <!-- Navbar -->
     </header>
+    <section class="p-4 text-right bg-light mt-5">
 
-    <!-- Indicadores -->
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 id="timezone" class="h3 mb-0 text-gray-800">Zona: </h1>
+
+        </div>
+        <h4 id="climaActual" class="mb-3">
+            Clima Actual
+        </h4>
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Temperatura</div>
+                                <div id="temperatura" class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Velocidad del viento</div>
+                                <div id="windspeed" class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1"> Hora actual
+                                </div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div id="current_time" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                    Clima</div>
+                                <div id="weathercode" class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fa fa-cloud fa-2x text-gray-300" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Gráficos -->
     <section class="p-4 text-right bg-light">
+        <h4 id="graficos" class="mb-3">
+            Gráficos
+        </h4>
+        <div class="row">
+
+            <div class="col-xl-7 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold text-primary">Temperatura</h5>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="plot1"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-xl-5 col-lg-5">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold text-primary">Temperatura Maxima y minima</h5>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="plot2"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h5 class="m-0 font-weight-bold text-primary">Probabilidad de precipitación</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="plot3"></canvas>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6 mb-4">
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h5 class="m-0 font-weight-bold text-primary">Precipitaciones semanales</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="plot4"></canvas>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </section>
+    <!-- Gráficos -->
+    <!-- Indicadores -->
+    <section class="p-4 text-right bg-light ">
         <h4 id="indicadores" class="mb-3">
             Indicadores
         </h4>
@@ -103,23 +261,7 @@
     </section>
 
     <!-- Indicadores -->
-    <!-- Gráficos -->
-    <section class="p-4 text-right bg-light">
-        <h4 id="graficos" class="mb-3">
-            Gráficos
-        </h4>
-        <div class="container">
-            <div class="row d-flex justify-content-center row-cols-2 row-cols-md-2 g-4 mt-2">
-                <div class="col">
-                    <canvas id="plot1"></canvas>
-                </div>
-                <div class="col">
-                    <canvas id="plot2"></canvas>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Gráficos -->
+
     <!-- Datos -->
     <section class="p-4 text-right bg-light">
         <h4 id="datos" class="mb-3">
@@ -139,6 +281,10 @@
                 </div>
 
             </div>
+
+            <div id="openweathermap-widget-11" class="d-flex justify-content-center align-items-center"></div>
+
+
             <div class="row row-cols-1 row-cols-md-1 g-3 mt-2">
                 <div class="col">
 
@@ -168,25 +314,30 @@
             </div>
         </div>
     </section>
+
     <!-- Datos -->
     <!-- Tabla de mareas -->
-  <section class="p-4 text-right bg-light">
-    <h4 class="mb-3">
-        Mapa de monitoreo de amenaza de inundaciones bajo pronóstico de precipitaciones
-    </h4>
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-1 g-3 mt-2">
-            <div class="col">
-                <div class="card">
-                    <div id="monitoreo" class="card-body">
-                        
+    <section class="p-4 text-right bg-light" id="mapa">
+        <h4 class="mb-3">
+            Mapa de monitoreo de amenaza de inundaciones bajo pronóstico de precipitaciones
+        </h4>
+        <h5 class="mb-3">
+           Para ver este contenido tiene que solicitar acceso al proxy demo 
+           <a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank">Clic aquí</a>
+        </h5>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-1 g-3 mt-2">
+                <div class="col">
+                    <div class="card">
+                        <div id="monitoreo" class="card-body">
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- Tabla de mareas -->
+    </section>
+    <!-- Tabla de mareas -->
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 
@@ -197,7 +348,7 @@
     <script type="module" src="public/javascript/load_data.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-
+    <script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script>
 </body>
 
 </html>

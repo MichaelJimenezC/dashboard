@@ -1,3 +1,13 @@
-.p-4{
-    background-color: black !important;
+/* Asegúrate de que el contenedor del widget ocupe todo el espacio disponible */
+#openweathermap-widget-11 {
+    width: 100%; /* Ocupa todo el ancho */
+    text-align: center; /* Centra el contenido textual */
+    display: flex; /* Utiliza flexbox */
+    justify-content: center; /* Centra los elementos hijos horizontalmente */
+    align-items: center; /* Centra los elementos hijos verticalmente */
+}
+
+/* Puedes necesitar estilos adicionales para manejar el contenido específico del widget */
+.navbar-nav .nav-link {
+    color: white !important;
 }
